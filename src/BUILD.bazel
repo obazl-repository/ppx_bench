@@ -1,0 +1,51 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_ocaml//build:rules.bzl",
+     "ocaml_library",
+     "ocaml_module",
+     "ocaml_signature",
+     "ppx_executable",
+     "ppx_module",
+)
+
+PPX_ARGS = []
+DEPS_1 = [
+    "@ppxlib//lib/ppxlib",
+    "@ppx_inline_test//lib/libname"
+]
+
+############################# Aggregates #############################
+ocaml_library(
+    name       = "ppx_bench",
+    manifest = [
+        ":Ppx_bench"
+    ],
+)
+
+######################## Modules & Signatures ########################
+ppx_module(
+    name          = "Ppx_bench",
+    struct        = "ppx_bench.ml",
+    sig           = ":Ppx_bench_cmi",
+    deps          = DEPS_1,
+    ppx           = ":ppx.exe",
+    ppx_args      = PPX_ARGS + [],
+    ppx_codeps    = ["//runtime-lib:ppx_bench_lib"]
+)
+ocaml_signature(
+    name          = "Ppx_bench_cmi",
+    src           = "ppx_bench.mli",
+    deps          = DEPS_1,
+    ppx           = ":ppx.exe",
+)
+
+
+
+###############
+ppx_executable(
+    name    = "ppx.exe",
+    main    = "@ppxlib//lib/runner",
+    prologue = [
+        "@ppxlib//lib/metaquot"
+    ],
+)

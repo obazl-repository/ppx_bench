@@ -1,0 +1,41 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_ocaml//build:rules.bzl",
+     "ocaml_ns_archive",
+     "ocaml_module",
+     "ocaml_signature",
+)
+
+############################# Aggregates #############################
+ocaml_ns_archive(
+    name       = "ppx_bench_lib",
+    ns_name    = "ppx_bench_lib",
+    manifest = [
+        ":Benchmark_accumulator",
+        ":Export"
+    ],
+)
+
+######################## Modules & Signatures ########################
+ocaml_module(
+    name          = "Benchmark_accumulator",
+    struct        = "benchmark_accumulator.ml",
+    sig           = ":Benchmark_accumulator_cmi",
+)
+ocaml_signature(
+    name          = "Benchmark_accumulator_cmi",
+    src           = "benchmark_accumulator.mli",
+)
+
+
+ocaml_module(
+    name          = "Export",
+    struct        = "export.ml",
+    sig           = ":Export_cmi",
+)
+ocaml_signature(
+    name          = "Export_cmi",
+    src           = "export.mli",
+)
+
+
