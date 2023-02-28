@@ -1,4 +1,4 @@
-ppx_bench
+ppx_bench (Bazel edition)
 =========
 
 Syntax extension for writing in-line benchmarks in OCaml code.
