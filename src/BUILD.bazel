@@ -29,9 +29,10 @@ ppx_module(
     sig           = ":Ppx_bench_cmi",
     deps          = DEPS_1,
     ppx           = ":ppx.exe",
-    ppx_args      = PPX_ARGS + [],
+    ppx_args      = PPX_ARGS + ["-loc-filename", "ppx_bench.ml"],
     ppx_codeps    = ["//runtime-lib:ppx_bench_lib"]
 )
+
 ocaml_signature(
     name          = "Ppx_bench_cmi",
     src           = "ppx_bench.mli",

@@ -22,6 +22,7 @@ ocaml_module(
     struct        = "benchmark_accumulator.ml",
     sig           = ":Benchmark_accumulator_cmi",
 )
+
 ocaml_signature(
     name          = "Benchmark_accumulator_cmi",
     src           = "benchmark_accumulator.mli",
@@ -33,6 +34,7 @@ ocaml_module(
     struct        = "export.ml",
     sig           = ":Export_cmi",
 )
+
 ocaml_signature(
     name          = "Export_cmi",
     src           = "export.mli",
